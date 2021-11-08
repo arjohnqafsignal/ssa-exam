@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/users';
 
     /**
      * The controller namespace for the application.
@@ -46,6 +46,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
+        });
+
+        Route::macro('softDeletes', function ($routeName, $controller){
+            Route::get("{$routeName}/trashed", "App\Http\Controllers\\".$controller."@trashed")->name("{$routeName}.trashed")->middleware('auth');
+            Route::patch("{$routeName}/{user}/restore", "App\Http\Controllers\\".$controller."@restore")->name("{$routeName}.restore")->middleware('auth');
+            Route::delete("{$routeName}/{user}/delete", "App\Http\Controllers\\".$controller."@delete")->name("{$routeName}.delete")->middleware('auth');
         });
     }
 
