@@ -20,7 +20,6 @@ Install all the dependencies using composer
 Install javascript dependencies using NPM/Yarn
 
     npm install / yarn install
-    npm install --save-dev cross-dev
 
 Copy the example env file and make the required configuration changes in the .env file
 
@@ -34,6 +33,10 @@ Run the database migrations (**Set the database connection in .env before migrat
 
     php artisan migrate
 
+To create the symbolic link,
+
+    php artisan storage:link
+
 Start the local development server
 
     php artisan serve
@@ -46,7 +49,6 @@ You can now access the server at http://localhost:8000
     cd ssa
     composer install
     npm install / yarn install
-    npm install --save-dev cross-dev
     cp .env.example .env
     php artisan key:generate
     
